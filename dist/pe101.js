@@ -2,12 +2,23 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = require("fs");
 const child_process_1 = require("child_process");
+/**
+ * Clase que realiza watch sobre un fichero a su vez que ejecuta comandos
+ */
 class pe101watch {
+    /**
+     *
+     * @param fname argumento del nombre de fichero;
+     * @param com argumentos de los comandos
+     */
     constructor(fname, com) {
         this.fname = fname;
         this.com = com;
         this.ls_out = [];
     }
+    /**
+     * Método que ejecuta el programa
+     */
     run() {
         if (this.f_exist()) {
             (0, fs_1.watch)(this.fname, (eventType, filename) => {
@@ -21,6 +32,10 @@ class pe101watch {
             });
         }
     }
+    /**
+     * Comprueba si existe el fichero
+     * @returns retorna true si existe y false si no
+     */
     f_exist() {
         if ((0, fs_1.existsSync)(this.fname)) {
             return true;
@@ -30,6 +45,9 @@ class pe101watch {
             return false;
         }
     }
+    /**
+     * Método que gestiona los comandos asignados
+     */
     f_command() {
         const c = this.com.join(' ');
         console.log(c);
